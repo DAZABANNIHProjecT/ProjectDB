@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+
+{% block my_content %}
+<ul>
+    <li>
+        <hr>
+        <h3>
+        <div>
+        <p> площадь {{page_obj[1]}} - метров квадратных, Этаж {{page_obj[0]}} из {{page_obj[6]}}</p>
+        <p> количество комнат {{page_obj[2]}}, {{page_obj[3]}} - цена вопроса (в рублях)</p>
+        <p>улица: {{page_obj[4]}}</p>
+        <p>количество парковочных мест: {{page_obj[5]}}</p>
+        <p>расстояния до метро - {{page_obj[6]}} метров, до автобусной остановки - {{page_obj[7]}}</p>
+        <!-- <img src="static/images/flat_19/2023-11-14_171733.png"> -->
+        <p align="center"><details>
+            <p><summary><u>оставить заявку</u></summary></p>
+            <p><a href="http://127.0.0.1:5000/buy/{{page_obj[9]}}/deal_company/">Как компания</a> | <a href="http://127.0.0.1:5000/buy/{{page_obj[9]}}/deal_client/">Как физическое лицо</a></p>
+
+        </details></p>    
+        </div>
+        </h3>
+    </li>
+{% endblock %}

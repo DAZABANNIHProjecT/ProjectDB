@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}    
+    <h4 align="center"><a href="http://127.0.0.1:5000/profile/">{{user.get_login()}}</a> | <a href="http://127.0.0.1:5000/logout/">logout</a></h4>
+    {% else %}
+    <h4 align="center">|<a href="http://127.0.0.1:5000/login/"> Sign in </a>|</h4>
+    {% endif %}
+    <h1 align='center'>{{ main_header | default('HOUSES')}}</h1>
+        <a href="http://127.0.0.1:5000/sell/" >
+            <h3 class="deal"  align='center'>Want to Sell</h3>
+        </a>
+    <h3 class="deal" align='center'><a href="http://127.0.0.1:5000/buy/">Want to Buy</a></h3>
+    <h3 class="deal" align='center'><a href="http://127.0.0.1:5000/join/">Want to join our team</a></h3>
+    {% block my_content %}
+    {% endblock  %}
+{% endblock %}
+
+

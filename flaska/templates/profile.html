@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+ 
+{% block app_content %}
+         <tr><td valign="top">
+                   <div class="profile-load">
+                   </form> 
+                   </div>
+         </td>
+         <td valign="top" class="profile-panel">
+                   <a align="center" href="{{url_for('logout')}}"><h3 align="right">Quit</a> | <a align="right" href="{{url_for('home')}}">Home</h3></a>
+                   <ul class="profile-info">
+                   <h2 align="center">{{ current_user.get_login() }}</h2>
+                   <hr>
+                   <!-- <h3  align="center">Phone: {{ current_user.get_phone() }}</h3> -->
+                   {% if current_user.get_position() == 'agent' or current_user.get_position() == 'supervisor'%}
+                        <h2 align="center"><a href="deals">Approve deals</a></h2>
+                        <hr>
+                   {%endif%} 
+                   {% if current_user.get_position() == 'supervisor' %}
+                        <h2 align="center"><a href="app_list">Hire people</a></h2>
+                        <hr>
+                   {%endif%} 
+                   </ul>
+         </td></tr>
+{% endblock %}

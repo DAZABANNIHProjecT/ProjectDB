@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+<ul>
+<h2 align="center"><a href="http://127.0.0.1:5000/profile/">Profile</a></h2>
+<h2 align="center"><a href="http://127.0.0.1:5000/">Main page</a></h2>
+{%for i in page_obj%}
+    <li>
+        <hr>
+        <h3>
+        <div>
+        <p> {{i[5]}}, {{i[3]}} years of expirience - position in {{i[6]}} with {{i[4]}} salary</p>
+        <p> {{i[2]}} - email of candidate</p>
+        <p> {{i[1]}} - phone number</p>
+        <p><details>
+            <summary><u>Просмотреть сопроводительное письмо</u></summary>
+            <p>{{i[7]}}</p>
+            <p><a href="/profile/app_list/delete_application/{{i[0]}}/">Отклонить заявку</a> | <a href="/profile/app_list/approve_application/{{i[0]}}/">Зачислить в штат</a></p>
+
+        </details></p>          
+        <!-- <p><a href="/profile/app_list/resume_application/{{i[0]}}/">Посмотреть резюме</a></p> -->
+        </div>
+        </h3>
+    </li>
+{%endfor%}
+{% endblock %}

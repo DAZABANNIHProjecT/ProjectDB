@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block my_content %}
+<ul>
+{%for i in page_obj%}
+    <li>
+        <hr>
+        <h3>
+        <div>
+        <p> площадь {{i[1]}} - метров квадратных</p>
+        <p> комнат {{i[2]}}</p>
+        <p>{{i[3]}} - цена вопроса (в рублях)</p>
+        <p><a href="{{i[7]}}">Посмотреть подробнее</a></p>
+    
+        </div>
+        </h3>
+    </li>
+{%endfor%}
+{% endblock %}

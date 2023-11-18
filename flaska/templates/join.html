@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block my_content %}
+<ul>
+{%for i in page_obj%}
+    <li>
+        <hr>
+        <h3>
+        <div>
+        <p> позиция: {{i[0]}}</p>
+        <p> локация: {{i[1]}}</p>
+        <p> требуемый опыт: {{i[4]}} - лет</p>
+        <p> {{i[5]}} - цена вопроса (в рублях)</p>
+        <p><a href="{{i[3]}}">Оставить заявку</a></p>
+        </div>
+        </h3>
+    </li>
+{%endfor%}
+{% endblock %}

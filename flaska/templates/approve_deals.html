@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+
+{% block my_content %}
+<ul>
+{%for i in page_obj%}
+    <li>
+        <hr>
+        <h3>
+        <div>
+        {% if i[0] is none %}
+            <p> покупка </p>
+        {% elif i[1] is none %}
+            <p> аренда компанией</p>
+        {% elif i[2] is none %}
+            <p> аренда человеком </p>
+        {% endif %}
+        <p>{{i[3]}} - дата и время создания сделки</p>
+        <p>владелец - {{i[4]}}</p>
+        <p><a href="/profile/app_list/approve/{{i[4]}}/">подтвердить</a></p>
+        
+        </div>
+        </h3>
+    </li>
+{%endfor%}
+{% endblock %}
