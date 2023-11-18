@@ -14,8 +14,7 @@ DEBUG = True
 DATABASE = '/tmp/agency.db'
 
 UPLOAD_FOLDER = '/flaska/static/images/'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'agency.db')))
@@ -75,7 +74,7 @@ def close_db(error):
 @login_manager.user_loader
 def load_user(user_id):
     print("load_user")
-    return UserLogin().fromDB(user_id, dbase)
+    return UserLogin().from_db(user_id, dbase)
 
 
 def allowed_file(filename):

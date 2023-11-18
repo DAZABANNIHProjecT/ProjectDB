@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}    
-    <h4 align="center"><a href="http://127.0.0.1:5000/profile/">{{user.get_login()}}</a> | <a href="http://127.0.0.1:5000/logout/">logout</a></h4>
+    <h4 align="center"><a href="http://127.0.0.1:5000/profile/">{{user.login}}</a> | <a href="http://127.0.0.1:5000/logout/">logout</a></h4>
     {% else %}
     <h4 align="center">|<a href="http://127.0.0.1:5000/login/"> Sign in </a>|</h4>
     {% endif %}
