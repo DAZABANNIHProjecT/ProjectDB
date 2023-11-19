@@ -1,3 +1,4 @@
+import wtforms.validators
 from flask_wtf import FlaskForm
 from wtforms import EmailField, FileField, MultipleFileField, SelectField, SelectMultipleField, StringField, \
     SubmitField, BooleanField, PasswordField, IntegerField, DateField, TelField, TextAreaField
@@ -9,7 +10,7 @@ class FlatForm(FlaskForm):
     area = IntegerField("Area: ")
     price = IntegerField("price: ")
     rooms = SelectField("Rooms:", choices=[1, 2, 3, 4, 5])
-    phone_number = IntegerField("Enter your phone number: ")
+    phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     street = StringField("Enter street: ")
     parking = SelectField("Enter number of parkings: ", choices=[0, 1, 2, 3])
     playground = SelectField("Enter number of playgrounds: ", choices=[0, 1, 2, 3])
@@ -23,31 +24,38 @@ class FlatForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    login = StringField("Login ")
+    login = StringField("Login ", [
+        wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
+        wtforms.validators.Regexp("[a-zA-Z0-9_]+", message="Логин должен состоять из латинских букв и цифр")
+    ])
     pwd = PasswordField("Password ")
     submit = SubmitField("Submit")
 
 
 class ApplicationForm(FlaskForm):
-    phone_number = IntegerField("Phone ")
+    phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     email = EmailField("Email ")
     letter = TextAreaField("Letter ")
     submit = SubmitField("Submit")
 
 
 class RegistrationForm(FlaskForm):
-    login = StringField("Login ")
-    # phone_number = StringField("Phone number ")
-    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm', message='Passwords must match')])
+    login = StringField("Login ", [
+        wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
+        wtforms.validators.Regexp("[a-zA-Z0-9_]+", message="Логин должен состоять из латинских букв и цифр")
+    ])
+    phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
+    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm',
+                                                               message='Passwords must match')])
     psw2 = PasswordField("Repeat password ")
     submit = SubmitField("Submit")
 
 
 class ClientBuyForm(FlaskForm):
-    phone_number = IntegerField("Phone number ")
+    phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     email = EmailField("Email ")
     type_of_deal = SelectMultipleField(choices=['rent', 'sale'])
-    client_price = IntegerField('Enter your price ')
+    client_price = IntegerField('Enter your price ', )
     submit = SubmitField("Submit")
 
 
@@ -59,20 +67,28 @@ class CompanyBuyForm(FlaskForm):
 
 
 class RegistrationTempForm(FlaskForm):
-    login = StringField("Login ")
+    login = StringField("Login ", [
+        wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
+        wtforms.validators.Regexp("[a-zA-Z0-9_]+", message="Логин должен состоять из латинских букв и цифр")
+    ])
     type_user = SelectField(choices=['owner', 'client'])
-    psw = StringField("Password ")
-    psw2 = StringField("Repeat password ")
+    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm',
+                                                               message='Passwords must match')])
+    psw2 = PasswordField("Repeat password ")
     submit = SubmitField("Submit")
 
 
 class ReportForm(FlaskForm):
     status = SelectField(choices=['done', 'unfinished'])
-    report_content = TextAreaField("Content ")
+    report_content = TextAreaField("Content ", [
+        wtforms.validators.Length(0, 2000, "Ваш отзыв должен не превышать 20000 символов")
+    ])
     submit = SubmitField("Submit")
 
 
 class RateForm(FlaskForm):
     mark = SelectField(choices=[1, 2, 3, 4, 5])
-    feedback_message = TextAreaField("Write down some comments")
+    feedback_message = TextAreaField("Write down some comments", [
+        wtforms.validators.Length(0,2000, "Ваш отзыв должен не превышать 20000 символов")
+    ])
     submit = SubmitField("Submit")
