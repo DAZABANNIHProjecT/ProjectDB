@@ -23,6 +23,7 @@ class FlatForm(FlaskForm):
     submit = SubmitField("Add")
 
 
+
 class LoginForm(FlaskForm):
     login = StringField("Login ", [
         wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
@@ -66,14 +67,15 @@ class CompanyBuyForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
+
 class RegistrationTempForm(FlaskForm):
     login = StringField("Login ", [
         wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
         wtforms.validators.Regexp("[a-zA-Z0-9_]+", message="Логин должен состоять из латинских букв и цифр")
     ])
     type_user = SelectField(choices=['owner', 'client'])
-    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm',
-                                                               message='Passwords must match')])
+    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm', message='Passwords must match')])
+
     psw2 = PasswordField("Repeat password ")
     submit = SubmitField("Submit")
 

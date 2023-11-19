@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 SECRET_KEY = 'sekret'
 DEBUG = True
 DATABASE = '/tmp/agency.db'
-
+# dsfsdf
 UPLOAD_FOLDER = '/flaska/static/images/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
