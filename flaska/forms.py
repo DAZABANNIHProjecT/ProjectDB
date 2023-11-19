@@ -63,6 +63,7 @@ class CompanyBuyForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
+
 class RegistrationTempForm(FlaskForm):
     login = StringField("Login ")
     type_user = SelectField(choices=['owner', 'client'])
