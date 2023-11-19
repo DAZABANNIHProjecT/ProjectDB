@@ -136,7 +136,7 @@ def deal_company(flat_id):
 @app.route('/buy/<int:flat_id>/deal_client/', methods=["POST", "GET"])
 def deal_client(flat_id):
     form = ClientBuyForm()
-    if request.method == "POST":
+    if form.validate_on_submit():
         try:
             res = dbase.add_client_deal(request.form['phone_number'], request.form['email'],
                                         request.form['type_of_deal'], request.form['client_price'], flat_id)
