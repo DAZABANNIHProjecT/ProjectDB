@@ -58,14 +58,6 @@ class CompanyBuyForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-class RegistrationTempForm(FlaskForm):
-    login = StringField("Login ")
-    type_user = SelectField(choices=['owner', 'client'])
-    psw = StringField("Password ")
-    psw2 = StringField("Repeat password ")
-    submit = SubmitField("Submit")
-
-
 class ReportForm(FlaskForm):
     status = SelectField(choices=['done', 'unfinished'])
     report_content = TextAreaField("Content ")
