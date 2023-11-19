@@ -1,3 +1,4 @@
+import wtforms.validators
 from flask_wtf import FlaskForm
 from wtforms import EmailField, FileField, MultipleFileField, SelectField, SelectMultipleField, StringField, \
     SubmitField, BooleanField, PasswordField, IntegerField, DateField, TelField, TextAreaField
@@ -22,8 +23,12 @@ class FlatForm(FlaskForm):
     submit = SubmitField("Add")
 
 
+
 class LoginForm(FlaskForm):
-    login = StringField("Login ")
+    login = StringField("Login ", [
+        wtforms.validators.Length(1, 20, "Логин должен быть длиной от 1 до 20 символов"),
+        wtforms.validators.Regexp("[a-zA-Z0-9_]+", message="Логин должен состоять из латинских букв и цифр")
+    ])
     pwd = PasswordField("Password ")
     submit = SubmitField("Submit")
 
@@ -55,6 +60,15 @@ class CompanyBuyForm(FlaskForm):
     taxpayer_identification_number = IntegerField('Enter your taxpayer identification number ')
     contact_information = EmailField("Enter contact information (email)")
     company_price = IntegerField('Enter your price ')
+    submit = SubmitField("Submit")
+
+
+
+class RegistrationTempForm(FlaskForm):
+    login = StringField("Login ")
+    type_user = SelectField(choices=['owner', 'client'])
+    psw = PasswordField("Password ", [InputRequired(), EqualTo('confirm', message='Passwords must match')])
+    psw2 = PasswordField("Repeat password ")
     submit = SubmitField("Submit")
 
 
