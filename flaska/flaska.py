@@ -118,7 +118,7 @@ def buy_page(flat_id):
 @app.route('/buy/<int:flat_id>/deal_company/', methods=["POST", "GET"])
 def deal_company(flat_id):
     form = CompanyBuyForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             res = dbase.add_company_deal(request.form['taxpayer_identification_number'],
                                          request.form['contact_information'],
@@ -153,7 +153,7 @@ def deal_client(flat_id):
 @app.route('/rate/<int:deal_id>/', methods=["POST", "GET"])
 def rate(deal_id):
     form = RateForm()
-    if request.method == "POST":
+    if form.validate_on_submit():
         try:
             res = dbase.add_rate(deal_id, request.form['mark'], request.form['feedback_message'])
             if not res:
@@ -178,7 +178,7 @@ def join():
 def join_form(vacancy_id):
     vacancy = dbase.get_vacancy(vacancy_id)
     form = ApplicationForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             res = dbase.add_application(request.form['phone_number'], request.form['email'], request.form['letter'],
                                         vacancy[0])
@@ -203,7 +203,7 @@ def app_list():
 @app.route('/sell/', methods=["POST", "GET"])
 def sell():
     form = FlatForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             res = dbase.add_flat(
                 request.form['floor'], request.form['area'], request.form['price'],
@@ -234,7 +234,7 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
     form = LoginForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             user = dbase.getUserByLogin(request.form['login'])
             print(request.form['pwd'])
@@ -283,7 +283,7 @@ def approve_deal(deal_id):
 @login_required
 def add_rep(deal_id):
     form = ReportForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             res = dbase.add_report(request.form['report_content'], request.form['status'], deal_id,
                                    current_user.get_id())
@@ -303,7 +303,7 @@ def add_emp(application_id):
     phone_number = dbase.get_number_and_pos_id(application_id)[0]
     position_id = dbase.get_number_and_pos_id(application_id)[1]
     form = RegistrationForm()
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         try:
             if request.form['psw'] == request.form['psw2']:
                 hash_psw = generate_password_hash(request.form['psw'])
