@@ -6,19 +6,19 @@ from wtforms.validators import DataRequired, Email, Length, InputRequired, Equal
 
 
 class FlatForm(FlaskForm):
-    floor = IntegerField("floor: ")
-    area = IntegerField("Area: ")
-    price = IntegerField("price: ")
+    floor = IntegerField("floor: ", [wtforms.validators.number_range(-2, 200, "В Бурдж Халифе всего 163 этажа, вы наверное, что то путаете")])
+    area = IntegerField("Area: ", [wtforms.validators.number_range(0, 1000000000, "Площадь квартиры не может быть отрицательным числом, или же миллиард кв. м тоже перебор")])
+    price = IntegerField("price: ", [wtforms.validators.number_range(0, 500000000000, "Цена квартиры не может быть отрицательным числом, или же 500 миллиард рублей тоже перебор")])
     rooms = SelectField("Rooms:", choices=[1, 2, 3, 4, 5])
     phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
-    street = StringField("Enter street: ")
+    street = StringField("Enter street: ", [wtforms.validators.Length(0, 50, "Название улицы не должно преавшать 500 символов")])
     parking = SelectField("Enter number of parkings: ", choices=[0, 1, 2, 3])
     playground = SelectField("Enter number of playgrounds: ", choices=[0, 1, 2, 3])
-    floors_count = IntegerField("Enter number of floors: ")
-    number = IntegerField("Enter your passport number: ")
+    floors_count = IntegerField("Enter number of floors: ", [wtforms.validators.number_range(-2, 200, "В Бурдж Халифе всего 163 этажа, вы наверное, что то путаете")])
+    number = StringField("Enter your passport number: ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     birth_date = DateField("Enter your birth date: ")
-    distance_underground = IntegerField("Enter distance to nearest underground: ")
-    distance_bus_stop = IntegerField("Enter distance to nearest bus stop: ")
+    distance_underground = IntegerField("Enter distance to nearest underground: ", [wtforms.validators.number_range(0, 500000000000, "Расстояние не может быть отрицательным или таким большим")])
+    distance_bus_stop = IntegerField("Enter distance to nearest bus stop: ", [wtforms.validators.number_range(0, 500000000000, "Расстояние не может быть отрицательным или таким большим")])
     photo = FileField("Upload photoes")
     submit = SubmitField("Add")
 
@@ -36,7 +36,7 @@ class LoginForm(FlaskForm):
 class ApplicationForm(FlaskForm):
     phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     email = EmailField("Email ")
-    letter = TextAreaField("Letter ")
+    letter = TextAreaField("Letter ", [wtforms.validators.Length(0, 2000, "Приложение не должно превышать 2000 символов")])
     submit = SubmitField("Submit")
 
 
@@ -56,14 +56,14 @@ class ClientBuyForm(FlaskForm):
     phone_number = StringField("Phone ", [wtforms.validators.Regexp("[8][\\d]{10}", message="Введите телефонный номер с восьмерки")])
     email = EmailField("Email ")
     type_of_deal = SelectMultipleField(choices=['rent', 'sale'])
-    client_price = IntegerField('Enter your price ', )
+    client_price = IntegerField('Enter your price ', [wtforms.validators.number_range(0, 500000000000, "Цена квартиры не может быть отрицательным числом, или же 500 миллиард рублей тоже перебор")])
     submit = SubmitField("Submit")
 
 
 class CompanyBuyForm(FlaskForm):
-    taxpayer_identification_number = IntegerField('Enter your taxpayer identification number ')
+    taxpayer_identification_number = IntegerField('Enter your taxpayer identification number '[wtforms.validators.Length(12, 12, "ИНН состоит из 12 цифр")])
     contact_information = EmailField("Enter contact information (email)")
-    company_price = IntegerField('Enter your price ')
+    company_price = IntegerField('Enter your price ', [wtforms.validators.number_range(0, 500000000000, "Цена квартиры не может быть отрицательным числом, или же 500 миллиард рублей тоже перебор")])
     submit = SubmitField("Submit")
 
 
