@@ -30,7 +30,7 @@ login_manager.login_message = "Авторизуйтесь для доступа 
 
 def connect_db():
     conn = mysql.connector.connect(user='root',
-                                   password='123QWEasdzxc',
+                                   password='12345',
                                    host='localhost',
                                    port='3306',
                                    database='agency')
@@ -53,7 +53,7 @@ def get_db():
     return g.link_db
 
 
-dbase = None
+# dbase = None
 
 
 @app.before_request
@@ -202,7 +202,7 @@ def app_list():
 @app.route('/sell/', methods=["POST", "GET"])
 def sell():
     form = FlatForm()
-    if request.method == "POST" and form.validate():
+    if form.validate():
         try:
             res = dbase.add_flat(
                 request.form['floor'], request.form['area'], request.form['price'],
@@ -230,13 +230,13 @@ def sell():
 # Обработчик страницы с заявкой для входа в систему для сотрудника
 @app.route("/login/", methods=["POST", "GET"])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('profile'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('profile'))
     form = LoginForm()
-    if request.method == "POST" and form.validate():
+    if request.method == "POST":
         try:
             user = dbase.getUserByLogin(request.form['login'])
-            print(request.form['pwd'])
+            print(user)
             if user and check_password_hash(user[3], request.form['pwd']):
                 rm = True if request.form.get('remainme') else False
                 userlogin = UserLogin().create(user)

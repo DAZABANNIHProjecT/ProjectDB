@@ -61,7 +61,7 @@ class ClientBuyForm(FlaskForm):
 
 
 class CompanyBuyForm(FlaskForm):
-    taxpayer_identification_number = IntegerField('Enter your taxpayer identification number '[wtforms.validators.Length(12, 12, "ИНН состоит из 12 цифр")])
+    taxpayer_identification_number = IntegerField('Enter your taxpayer identification number ',[wtforms.validators.Length(12, 12, "ИНН состоит из 12 цифр")])
     contact_information = EmailField("Enter contact information (email)")
     company_price = IntegerField('Enter your price ', [wtforms.validators.number_range(0, 500000000000, "Цена квартиры не может быть отрицательным числом, или же 500 миллиард рублей тоже перебор")])
     submit = SubmitField("Submit")
@@ -94,3 +94,5 @@ class RateForm(FlaskForm):
         wtforms.validators.Length(0,2000, "Ваш отзыв должен не превышать 20000 символов")
     ])
     submit = SubmitField("Submit")
+
+# class SearchForm(FlaskForm):

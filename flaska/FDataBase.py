@@ -279,7 +279,7 @@ class FDataBase:
     def getUserByLogin(self, login):
         try:
             self.__cur.execute(f"SELECT * FROM employee WHERE login = '{login}' LIMIT 1")
-            res = self.__cur.fFetchone()
+            res = self.__cur.fetchone()
             if not res:
                 print("Пользователь не найден")
                 return False
