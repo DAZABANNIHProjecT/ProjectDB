@@ -2,16 +2,16 @@
 
 {% block app_content %}
 <ul>
-<h2 align="center"><a href="http://127.0.0.1:5000/profile/">Profile</a></h2>
-<h2 align="center"><a href="http://127.0.0.1:5000/">Main page</a></h2>
+<h2 align="center"><a href="http://127.0.0.1:5000/profile/">Профиль</a></h2>
+<h2 align="center"><a href="http://127.0.0.1:5000/">Главная страница</a></h2>
 {%for i in page_obj%}
     <li>
         <hr>
         <h3>
         <div>
-        <p> {{i[5]}}, {{i[3]}} years of expirience - position in {{i[6]}} with {{i[4]}} salary</p>
-        <p> {{i[2]}} - email of candidate</p>
-        <p> {{i[1]}} - phone number</p>
+        <p> {{i[5]}}, {{i[3]}} требуемый опыт - в городе {{i[6]}} со следующей зарплатой {{i[4]}}</p>
+        <p> {{i[2]}} - почта</p>
+        <p> {{i[1]}} - номер телефона</p>
         <p><details>
             <summary><u>Просмотреть сопроводительное письмо</u></summary>
             <p>{{i[7]}}</p>

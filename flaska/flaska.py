@@ -1,8 +1,7 @@
 import os
 from flask import Flask, redirect, flash, render_template, request, url_for, g
 import mysql.connector
-from forms import ApplicationForm, ClientBuyForm, CompanyBuyForm, FlatForm, LoginForm, RateForm, RegistrationForm, \
-    RegistrationTempForm, ReportForm
+from forms import ApplicationForm, ClientBuyForm, CompanyBuyForm, FlatForm, LoginForm, RateForm, RegistrationForm, ReportForm
 from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required

@@ -13,11 +13,11 @@
                    <hr>
                    <!-- <h3  align="center">Phone: {{ current_user.phone }}</h3> -->
                    {% if current_user.position == 'agent' or current_user.position == 'supervisor'%}
-                        <h2 align="center"><a href="deals">Approve deals</a></h2>
+                        <h2 align="center"><a href="deals">подтвердить сделку</a></h2>
                         <hr>
                    {%endif%} 
                    {% if current_user.position == 'supervisor' %}
-                        <h2 align="center"><a href="app_list">Hire people</a></h2>
+                        <h2 align="center"><a href="app_list">нанять людей</a></h2>
                         <hr>
                    {%endif%} 
                    </ul>
